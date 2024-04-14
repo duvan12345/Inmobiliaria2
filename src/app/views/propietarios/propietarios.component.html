@@ -1,0 +1,134 @@
+<div class="container">
+  
+    <h1 style="text-align:center">PROPIETARIOS</h1>
+    <div class="row">
+      <div class="col-lg-3">
+        <input type="text"  
+        name="searchTerm"  
+        class="form-control" 
+        id="table-complete-search"   
+        placeholder="Buscar..."
+     
+       >
+       </div>
+       <!-- [(ngModel)]="terminoBusqueda" -->
+    <div class="col-lg-6">
+      <button class="btn btn-primary" ><i class="bi bi-person-fill-add" (click)="opend(content)"></i> Agregar Propietario</button>
+            <!-- <button class="btn btn-primary" (click)="open(content)"><i class="fa fa-user-plus"></i> Crear
+              usuario</button> -->
+    </div>
+    </div>
+    <div class="row" >
+      <table class="table">
+        <thead>
+          <tr id="myTable">
+            <th  scope="col">PRIMER NOMBRE</th>
+            <th scope="col">SEGUNDO NOMBRE</th>
+            <th scope="col">PRIMER APELLIDO</th>
+            <th scope="col">SEGUNDO APELLIDO</th>
+            <th scope="col">T.IDENTIFICACION</th>
+            <th scope="col">N° IDENTIFICACION</th>
+            <th scope="col">ACCION</th>
+
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+         
+          <!-- <tr    *ngFor="let item of ListaVenta  ">
+           *ngFor="let item of refreshIncident() "
+           <tr    *ngFor="let item of ListIncidentsPagination "> 
+                <td>{{ item.NombreDepartamento || 'Sin fecha' }} </td>
+                <td>{{ item.NombreMunicipio }} </td>
+                <td>{{ item.Dirreccion }} </td>
+                <td>{{ item.SuperficieMetrosCuadrados }}  </td>
+                <td>{{ item.Precio }}  </td>
+                <td> <button class="btn btn-primary"
+                  (click)="open(content,item)" > Ver más</button></td>
+                         (click)="open(content,item)" 
+            </tr> -->
+        </tbody>
+      </table>
+      <!-- <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                            (pageChange)="refreshIncident()">
+              </ngb-pagination> -->
+
+    </div>
+
+</div>
+
+
+<ng-template #content let-modal >
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">INFORMACION DE PROPIETARIO </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+            <!-- <h4 class="modal-title" style="text-align:center" id="modal-basic-title">UBICACION</h4> -->
+            <br>
+              <form [formGroup]="Propietario" (ngSubmit)="saveUser()">
+                  <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="idPNombre">Primer Nombre</label>
+                            <input type="text" class="form-control" formControlName="PNombre" placeholder="Primer Nombre"
+                                name="primer nombre" id="idPNombre" [ngClass]="{'is-invalid': Propietario.controls['PNombre'].invalid && submitForm}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="idSNombre">Segundo Nombre</label>
+                            <input type="text" class="form-control" formControlName="SNombre" placeholder="Segundo Nombre"
+                                name="Segundo Nombre " id="idSNombre" [ngClass]="{'is-invalid': Propietario.controls['SNombre'].invalid && submitForm}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="PApellido">Primer Apellido</label>
+                            <input type="text" class="form-control" formControlName="PApellido" placeholder="Primer Apellido"
+                                name="Primer Apellido " id="idPApellido" [ngClass]="{'is-invalid': Propietario.controls['PApellido'].invalid && submitForm}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="idSApellido">Segundo Apellido</label>
+                            <input type="text" class="form-control" formControlName="SApellido" placeholder="Segundo Apellido"
+                                name="Segundo Apellido " id="idSApellido" [ngClass]="{'is-invalid': Propietario.controls['SApellido'].invalid && submitForm}">
+                        </div>
+                    </div>
+        
+                  </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="IdTipIdentificacion">T.I</label>
+                            <select formControlName="IdTipIdentificacion" class="form-control" name="rol" id="IdTipIdentificacion" [ngClass]="{'is-invalid': 
+                                Propietario.controls['IdTipIdentificacion'].invalid && submitForm}">
+                                <option [value]="null">Seleccione</option>
+                                <option *ngFor="let item of ListaIdentificacion" [value]="item.IdTipIdentificacion">{{ item.Abreviacion }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="idNumIdentificacion">Documento</label>
+                            <input type="text" class="form-control" formControlName="NumIdentificacion" placeholder="Documento"
+                                name="Documento " id="idNumIdentificacion" [ngClass]="{'is-invalid': Propietario.controls['NumIdentificacion'].invalid && submitForm}">
+                        </div>
+                    </div>
+
+                </div>
+                 
+              </form>
+            </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="saveUser()">Guardar</button>
+    </div>
+    </div>
+  </ng-template>

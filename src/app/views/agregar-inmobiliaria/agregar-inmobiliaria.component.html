@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="modal-body">
+        <div class="container-fluid">
+            <!-- <h4 class="modal-title" style="text-align:center" id="modal-basic-title">UBICACION</h4> -->
+            <br>
+              <form [formGroup]="Reporte" (ngSubmit)="saveUser()">
+                  <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                          
+                            <input id="IdDepartamento" type="text" class="form-control" formControlName="IdDepartamento"
+                            [ngbTypeahead]="search" [formControl]="model" [inputFormatter]="formatter"
+                            placeholder="Departamento" [ngClass]="{'is-invalid': Reporte.controls['IdDepartamento'].invalid && submitForm}" > 
+                        
+                       
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdCiudad">Segundo Nombre</label>
+                            <input type="text" class="form-control" formControlName="IdCiudad" placeholder="Segundo Nombre"
+                                name="Segundo Nombre " id="IdCiudad" [ngClass]="{'is-invalid': Reporte.controls['IdCiudad'].invalid && submitForm}">
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="idPNombre">Primer Nombre</label>
+                            <input type="text" class="form-control" formControlName="PNombre" placeholder="Primer Nombre"
+                                name="primer nombre" id="idPNombre" [ngClass]="{'is-invalid': Propietario.controls['PNombre'].invalid && submitForm}">
+                        </div>
+                    </div> -->
+
+                </div>
+
+                    <!-- <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="idSNombre">Segundo Nombre</label>
+                            <input type="text" class="form-control" 
+                            
+                            
+                            
+                            ="SNombre" placeholder="Segundo Nombre"
+                                name="Segundo Nombre " id="idSNombre" [ngClass]="{'is-invalid': Propietario.controls['SNombre'].invalid && submitForm}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="PApellido">Primer Apellido</label>
+                            <input type="text" class="form-control" formControlName="PApellido" placeholder="Primer Apellido"
+                                name="Primer Apellido " id="idPApellido" [ngClass]="{'is-invalid': Propietario.controls['PApellido'].invalid && submitForm}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="idSApellido">Segundo Apellido</label>
+                            <input type="text" class="form-control" formControlName="SApellido" placeholder="Segundo Apellido"
+                                name="Segundo Apellido " id="idSApellido" [ngClass]="{'is-invalid': Propietario.controls['SApellido'].invalid && submitForm}">
+                        </div>
+                    </div>
+        
+                  </div> -->
+                <!-- <div class="row">
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="IdTipIdentificacion">T.I</label>
+                            <select formControlName="IdTipIdentificacion" class="form-control" name="rol" id="IdTipIdentificacion" [ngClass]="{'is-invalid': 
+                                Propietario.controls['IdTipIdentificacion'].invalid && submitForm}">
+                                <option [value]="null">Seleccione</option>
+                                <option *ngFor="let item of ListaIdentificacion" [value]="item.IdTipIdentificacion">{{ item.Abreviacion }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="idNumIdentificacion">Documento</label>
+                            <input type="text" class="form-control" formControlName="NumIdentificacion" placeholder="Documento"
+                                name="Documento " id="idNumIdentificacion" [ngClass]="{'is-invalid': Propietario.controls['NumIdentificacion'].invalid && submitForm}">
+                        </div>
+                    </div>
+
+                </div> -->
+                 
+              </form>
+            </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="saveUser()">Guardar</button>
+    </div>
+
+</div>

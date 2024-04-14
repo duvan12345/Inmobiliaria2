@@ -1,0 +1,15 @@
+.modal-open {
+    overflow: auto !important; /* Restaurar el desbordamiento */
+  }
+  // #miTablaPersonalizada th{
+  //   width: 130px;
+  //   overflow: auto;
+  //   border: 1px solid;
+  // }
+  // table{
+  //   table-layout: fixed;
+  // }
+
+  .modal-Body {
+    overflow: scroll;
+}

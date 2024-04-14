@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'; // seccion de todo el franwork de angular
 import { ServerModule } from '@angular/platform-server';
 
 import { AppModule } from './app.module';

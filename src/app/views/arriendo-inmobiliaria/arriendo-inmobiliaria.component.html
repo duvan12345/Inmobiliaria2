@@ -1,0 +1,305 @@
+
+<div class="container">
+  
+    <h1 style="text-align:center">ARRIENDOS INMOBILIARIA</h1>
+    <div class="row">
+      <div class="col-lg-3">
+        <input type="text"  
+        name="searchTerm"  
+        class="form-control" 
+        id="table-complete-search"   
+        placeholder="Buscar..."
+        [(ngModel)]="terminoBusqueda"
+       >
+       </div>
+   
+    <div class="col-lg-6">
+      <button class="btn btn-primary" (click)="openx(NuevoApartamento)"><i class="bi bi-house-add-fill"></i> Agregar Inmobiliario</button>
+            <!-- <button class="btn btn-primary" (click)="open(content)"><i class="fa fa-user-plus"></i> Crear
+              usuario</button> -->
+    </div>
+    </div>
+    <div class="row" >
+      <table class="table">
+        <thead>
+          <tr id="myTable">
+            <th  scope="col">DEPARTAMENTO</th>
+            <th scope="col">MUNICIPIO</th>
+            <th scope="col">Dirreccion</th>
+            <th scope="col">SUPERFICIE</th>
+            <th scope="col">PRECIO</th>
+            <th scope="col">T.Inmobiliaria</th>
+            <th scope="col">ACCION</th>
+
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+         
+          <tr    *ngFor="let item of ListaArriendo  ">
+            <!-- *ngFor="let item of refreshIncident() " -->
+            <!-- <tr    *ngFor="let item of ListIncidentsPagination "> -->
+                <td>{{ item.NombreDepartamento || 'Sin fecha' }} </td>
+                <td>{{ item.NombreMunicipio }} </td>
+                <td>{{ item.Dirreccion }} </td>
+                <td>{{ item.SuperficieMetrosCuadrados }}  </td>
+                <td>{{ item.Precio }}  </td>
+                <td>{{ item.TipoInmueble }}  </td>
+                <td> <button class="btn btn-primary"
+                  (click)="open(content,item)" > Ver más</button></td>
+                        <!-- (click)="open(content,item)" -->
+            </tr>
+        </tbody>
+      </table>
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                            (pageChange)="refreshIncident()">
+              </ngb-pagination>
+
+    </div>
+        
+    
+    
+
+</div>
+<!-- <style>
+  .modal-backdrop {
+    z-index: 1050 !important;
+}
+</style> -->
+<ng-template #NuevoApartamento let-modal >
+  <div class="modal-content" >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title"> NUEVA ARRIENDO INMOBILIARIA </h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+    </div>
+  </div>
+</ng-template>
+<ng-template #content let-modal >
+  <div class="modal-content" >
+    <!-- <form [formGroup]="Reporte"> -->
+    <div class="modal-header">
+
+      <h4 class="modal-title" style="text-align:center" id="modal-basic-title"> INFORMACION DE  {{ Reporte.controls.TipoInmueble.value}} </h4>
+
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+
+     </div>
+     <div class="modal-body">
+        <div class="container-fluid">
+          <h4 class="modal-title" style="text-align:center" id="modal-basic-title">UBICACION</h4>
+          <br>
+            <form [formGroup]="Reporte">
+                <div class="row">
+                  <div class="col-md-4">
+                      <div class="form-group">
+                          <label for="formGroupExampleInput">Departamento   </label>
+                          <input type="text" class="form-control" id="formGroupExampleInput"
+                              placeholder="Example input" formControlName="NombreDepartamento" style="text-align:center"  readonly>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="form-group">
+                          <label for="formGroupExampleInput">Municipio</label>
+                          <input type="text" class="form-control" id="formGroupExampleInput"
+                              placeholder="Example input" formControlName="NombreMunicipio" style="text-align:center"  readonly> 
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Dirreccion</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                            placeholder="Example input" formControlName="Dirreccion" style="text-align:center"  readonly> 
+                    </div>
+                 </div>
+              
+                 
+                </div>
+                <br>
+                <h4 class="modal-title" style="text-align:center" id="modal-basic-title">DETALLES DE {{ Reporte.controls.TipoInmueble.value}}</h4>
+                <div class="row">
+                  <br>    
+                  <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">SuperficieM2</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                            placeholder="Example input" formControlName="SuperficieMetrosCuadrados"  style="text-align:center" readonly> 
+                    </div>
+                  </div>
+                 
+                  <div class="col-md-1">
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                     
+                        <label for="formGroupExampleInput">Precio</label>
+                        <div class="input-group has-validation">
+                        <span class="input-group-text" id="validationTooltipUsernamePrepend">$</span>
+
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                            placeholder="Example input" formControlName="Precio"  style="text-align:center" readonly> 
+                          </div>
+                    </div>
+                  </div>
+                  <div *ngIf="Reporte.controls.TipoInmueble.value == 'LOCAL' ? true : false" class="col-md-1">
+                  </div>
+                  
+                  <div *ngIf="Reporte.controls.TipoInmueble.value == 'BODEGA' ? true : false" class="col-md-2">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Capacidad M3</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                            placeholder="Example input" formControlName="CapacidadMetroCubicos"  style="text-align:center" readonly> 
+                    </div>
+                  </div>
+                   
+                  
+                  <div  *ngIf="Reporte.controls.TipoInmueble.value == 'BODEGA' ? true : false" class="col-md-2">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Estrato</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                            placeholder="Example input" formControlName="NumeroEstrato" style="text-align:center"  readonly> 
+                    </div>
+                  </div>
+
+                  <div *ngIf="Reporte.controls.TipoInmueble.value == 'LOCAL' ? true : false" class="col-md-2">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">COCINA</label>
+                      <BR>
+                      <input type="checkbox" class="form-check-input" id="formGroupExampleInput"
+                      placeholder="Example input" formControlName="Cocina"> 
+                  </div>
+                </div>
+
+                  <div *ngIf="Reporte.controls.TipoInmueble.value == 'APARTAMENTO'|| Reporte.controls.TipoInmueble.value == 'CASA' ? true : false" class="col-md-1">
+                  </div>
+                  
+                  <div *ngIf="Reporte.controls.TipoInmueble.value == 'LOCAL' ? true : false" class="col-md-2">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">N°Oficinas</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                            placeholder="Example input" formControlName="NumOficinas"  style="text-align:center" readonly> 
+                    </div>
+                  </div>
+                  <div *ngIf="Reporte.controls.TipoInmueble.value == 'APARTAMENTO'|| Reporte.controls.TipoInmueble.value == 'CASA' ? true : false" class="col-md-2">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">N°Habitaciones</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                            placeholder="Example input" formControlName="NumHabitaciones"  style="text-align:center" readonly> 
+                    </div>
+                  </div>
+                    
+                  <div   *ngIf="Reporte.controls.TipoInmueble.value == 'APARTAMENTO'|| Reporte.controls.TipoInmueble.value == 'CASA' ? true : false"   class="col-md-2">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">N°Baños</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                        placeholder="Example input" formControlName="NumBaño" style="text-align:center" readonly> 
+                    </div>
+                  </div>
+
+                
+                </div>
+                <br   *ngIf="Reporte.controls.TipoInmueble.value == 'LOCAL' || Reporte.controls.TipoInmueble.value == 'APARTAMENTO'|| Reporte.controls.TipoInmueble.value == 'CASA'   ? true : false">
+                <div class="row">
+
+                  <div  *ngIf="Reporte.controls.TipoInmueble.value == 'LOCAL' ? true : false" class="col-md-2">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Estrato</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                            placeholder="Example input" formControlName="NumeroEstrato" style="text-align:center" readonly> 
+                    </div>
+                  </div>
+                  <div *ngIf="Reporte.controls.TipoInmueble.value == 'APARTAMENTO'|| Reporte.controls.TipoInmueble.value == 'CASA' ? true : false" class="col-md-2">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">N°Parqueadero</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                            placeholder="Example input" formControlName="NumParqueadero" readonly> 
+                    </div>
+                  </div>
+                  
+                  <div  *ngIf="Reporte.controls.TipoInmueble.value == 'APARTAMENTO'|| Reporte.controls.TipoInmueble.value == 'CASA' ? true : false" class="col-md-2">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Estrato</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                            placeholder="Example input" formControlName="NumeroEstrato"  style="text-align:center" readonly> 
+                    </div>
+                  </div>
+                  <div *ngIf="Reporte.controls.TipoInmueble.value == 'APARTAMENTO'|| Reporte.controls.TipoInmueble.value == 'CASA' ? true : false" class="col-md-2">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">COCINA</label>
+                      <BR>
+                      <input type="checkbox" class="form-check-input" id="formGroupExampleInput"
+                      placeholder="Example input" formControlName="Cocina"> 
+                  </div>
+                  </div>
+                  <div *ngIf="Reporte.controls.TipoInmueble.value == 'APARTAMENTO'|| Reporte.controls.TipoInmueble.value == 'CASA' ? true : false" class="col-md-2">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">SALA</label>
+                      <BR>
+                      <input type="checkbox" class="form-check-input" id="formGroupExampleInput"
+                      placeholder="Example input" formControlName="Sala"> 
+                  </div>
+                  </div>
+                
+                  <div *ngIf="Reporte.controls.TipoInmueble.value == 'APARTAMENTO'|| Reporte.controls.TipoInmueble.value == 'CASA' ? true : false" class="col-md-2">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">COMEDOR</label>
+                      <BR>
+                      <input type="checkbox" class="form-check-input" id="formGroupExampleInput"
+                      placeholder="Example input" formControlName="Comedor"> 
+                  </div>
+                  </div>
+                 
+
+
+                  <div *ngIf="Reporte.controls.TipoInmueble.value == 'APARTAMENTO'|| Reporte.controls.TipoInmueble.value == 'CASA' ? true : false" class="col-md-2">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">ESTUDIO</label>
+                      <BR>
+                      <input type="checkbox" class="form-check-input" id="formGroupExampleInput"
+                      placeholder="Example input" formControlName="Estudio"> 
+                  </div>
+                  </div>
+                </div>
+                <br>
+                <h4 class="modal-title" style="text-align:center" id="modal-basic-title">INFORMACION DEL PROPIETARIO</h4> 
+                <br>
+                <div class="row">
+                  <div class="col-md-5">
+      
+                    <div class="form-group">
+                      <label   for="formGroupExampleInput">Nombre Propietario</label>
+                      <input type="text"  id="formGroupExampleInput" class="form-control"
+                      placeholder="Example input" formControlName="NombreCompleto" style="text-align:center" readonly> 
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                     
+                      <label for="formGroupExampleInput">Documento</label>
+                      <div class="input-group has-validation">
+                      <span class="input-group-text" id="validationTooltipUsernamePrepend" >{{ Reporte.controls.Abreviacion.value }}</span>
+               
+                     
+                      <input type="text" class="form-control" id="formGroupExampleInput"
+                          placeholder="Example input" formControlName="NumIdentificacion"  style="text-align:center" readonly> 
+                        </div>
+                   </div>
+                  </div>
+             
+
+                  
+                </div>    
+                
+              
+              
+            </form>
+        </div>
+    </div>
+  <!-- </form> -->
+  </div>
+
+</ng-template>
+
+ 

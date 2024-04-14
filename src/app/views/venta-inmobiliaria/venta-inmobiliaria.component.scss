@@ -1,0 +1,34 @@
+.center-table {
+    margin: 0 auto; /* Esto centra la tabla horizontalmente */
+  }
+  .modal-open {
+    overflow: auto !important; /* Restaurar el desbordamiento */
+  }
+  // #miTablaPersonalizada th{
+  //   width: 130px;
+  //   overflow: auto;
+  //   border: 1px solid;
+  // }
+  // table{
+  //   table-layout: fixed;
+  // }
+
+  .modal-Body {
+    overflow: scroll;
+}
+
+// .custom-modal {
+//   max-width: 500px; /* ajusta el ancho máximo del modal */
+//   margin: 0 auto; /* centrar el modal horizontalmente */
+//   padding: 20px; /* ajustar el relleno interno del modal */
+// }
+
+// .custom-modal .modal-body {
+//   max-height: 400px; /* ajusta la altura máxima del área del cuerpo del modal */
+//   overflow-y: auto; /* activa el desplazamiento vertical si el contenido es demasiado largo */
+// }
+
+// .custom-modal .modal-title {
+//   font-size: 1.5rem; /* ajusta el tamaño de la fuente del título del modal */
+// }
+
