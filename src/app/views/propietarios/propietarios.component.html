@@ -1,4 +1,5 @@
-<div class="container">
+
+  <div class="container">
   
     <h1 style="text-align:center">PROPIETARIOS</h1>
     <div class="row">
@@ -74,6 +75,10 @@
                             <label for="idPNombre">Primer Nombre</label>
                             <input type="text" class="form-control" formControlName="PNombre" placeholder="Primer Nombre"
                                 name="primer nombre" id="idPNombre" [ngClass]="{'is-invalid': Propietario.controls['PNombre'].invalid && submitForm}">
+                                <span *ngIf="isValidField('PNombre')"
+                                class="form-text text-danger">
+                              {{ getFieldError('PNombre') }}
+                             </span>
                         </div>
                     </div>
 
@@ -82,6 +87,7 @@
                             <label for="idSNombre">Segundo Nombre</label>
                             <input type="text" class="form-control" formControlName="SNombre" placeholder="Segundo Nombre"
                                 name="Segundo Nombre " id="idSNombre" [ngClass]="{'is-invalid': Propietario.controls['SNombre'].invalid && submitForm}">
+                                <span *ngIf="isValidField('SNombre')" class="form-text text-danger">{{ getFieldError('SNombre') }} </span>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -89,6 +95,7 @@
                             <label for="PApellido">Primer Apellido</label>
                             <input type="text" class="form-control" formControlName="PApellido" placeholder="Primer Apellido"
                                 name="Primer Apellido " id="idPApellido" [ngClass]="{'is-invalid': Propietario.controls['PApellido'].invalid && submitForm}">
+                                <span *ngIf="isValidField('PApellido')" class="form-text text-danger">{{ getFieldError('PApellido') }} </span>
                         </div>
                     </div>
 
@@ -97,6 +104,7 @@
                             <label for="idSApellido">Segundo Apellido</label>
                             <input type="text" class="form-control" formControlName="SApellido" placeholder="Segundo Apellido"
                                 name="Segundo Apellido " id="idSApellido" [ngClass]="{'is-invalid': Propietario.controls['SApellido'].invalid && submitForm}">
+                                <span *ngIf="isValidField('SApellido')" class="form-text text-danger">{{ getFieldError('SApellido') }} </span>
                         </div>
                     </div>
         
@@ -118,6 +126,7 @@
                             <label for="idNumIdentificacion">Documento</label>
                             <input type="text" class="form-control" formControlName="NumIdentificacion" placeholder="Documento"
                                 name="Documento " id="idNumIdentificacion" [ngClass]="{'is-invalid': Propietario.controls['NumIdentificacion'].invalid && submitForm}">
+                                <span *ngIf="isValidField('NumIdentificacion')" class="form-text text-danger">{{ getFieldError('NumIdentificacion') }} </span>
                         </div>
                     </div>
 
@@ -132,3 +141,5 @@
     </div>
     </div>
   </ng-template>
+
+

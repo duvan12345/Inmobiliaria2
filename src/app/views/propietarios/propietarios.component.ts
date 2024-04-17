@@ -10,15 +10,15 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class PropietariosComponent implements OnInit{
 
-  Propietario = this.Propietarios.group({
-    IdTipIdentificacion: [ [Validators.required]],
-    NumIdentificacion: ['', [Validators.required, , Validators.pattern(/^\d{3}-\d{2}-\d{4}$/)]],
-    PNombre: ['', [Validators.required]],
-    SNombre: ['', [Validators.required]],
-    PApellido: ['', [Validators.required]],
-    SApellido: ['', [Validators.required]],
-    Usuario: ['', [Validators.required]],
-   
+  public Propietario: FormGroup = this.Propietarios.group({
+    //  Propietario = this.Propietarios.group({
+    IdTipIdentificacion: ['', [Validators.required]],
+    NumIdentificacion: ['', [Validators.required], Validators.pattern('[a-zA-Z0-9]*')],
+    PNombre: ['', [Validators.required,   Validators.minLength(2)], Validators.pattern('[a-zA-Z0-9]*') ],
+    SNombre: ['', [Validators.required,   Validators.minLength(2), Validators.pattern('[a-zA-Z0-9]*')]],
+    PApellido: ['', [Validators.required,  Validators.minLength(2), Validators.pattern('[a-zA-Z0-9]*')]],
+    SApellido: ['', [Validators.required,  Validators.minLength(2), Validators.pattern('[a-zA-Z0-9]*')]]
+
     
   });
 
@@ -40,58 +40,54 @@ export class PropietariosComponent implements OnInit{
   }
 
   ngOnInit(): void {
-     this.opend
-   }
-  opend(content: TemplateRef<any>) {
-    this.modalService.open(content, { size: 'lg', scrollable: true });
-  }
- 
-
-  saveUser(){
-  this.submitForm  = true;
-  let date= new Date();
-    if (this.submitForm && this.Propietario.valid) {
-  
-    //   .createUserWithEmailAndPassword(this.userForm.controls.email.value || "", this.userForm.controls.password.value || "")
-    //   .then((result:any) => {
-    //     debugger
-    //     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-    //       `users/${result.user.uid}`
-    //     );
-    //     const userData: UserAuth = {
-    //       uid: result.user.uid,
-    //       email: result.user.email,
-    //       displayName: result.user.displayName,
-    //       photoURL: result.user.photoURL,
-    //       emailVerified: result.user.emailVerified,
-    //     };
-    //     userRef.set(userData, {
-    //       merge: true,
-    //     });
-        
-    //     let saveObj= {
-    //       "PriSegApellidos":this.userForm.controls.names.value,
-    //       "PriSegNombres":this.userForm.controls.lastNames.value,
-    //       "email":this.userForm.controls.email.value,
-    //       "estado":true,
-    //       "fechaCreacion":date.toISOString().toString().split("T")[0],
-    //       "idRol":"2",
-    //       "telefono":this.userForm.controls.phone.value,
-    //       "uid":result.user.uid
-    //     }
-    //     this.afStore.collection('infoPersonas').doc(result.user.uid).set(
-    //       saveObj
-    //     )
-    //     alert("Se guardo correctamente.")
-    //     this.modalService.dismissAll();
-    //   })
-    //   .catch((error) => {
-    //     // window.alert(error.message);
-    //  alert("El correo electrónico ya está en uso en otra cuenta");
-    //   });      
-    } else {
-      alert("Campos obligatorios.")
+    console.log(this.Propietario.value)
     }
-  }
+ 
+    isValidField(field:string ){
+     
+     return this.Propietario.controls[field].errors 
+     && this.Propietario.controls[field].touched;
+    }
+ 
+    getFieldError( field: string ): string | null {
+ 
+     if ( !this.Propietario.controls[field] ) return null;
+ 
+     const errors = this.Propietario.controls[field].errors || {};
+ 
+     for (const key of Object.keys(errors) ) {
+       switch( key ) {
+         case 'required':
+           return 'Este campo es requerido';
+ 
+         case 'minlength':
+           return `Mínimo ${ errors['minlength'].requiredLength } caracters.`;
+       }
+     }
+ 
+     return null;
+   }
+ 
+ 
+   opend(content: TemplateRef<any>) {
+     this.modalService.open(content, { size: 'lg', scrollable: true });
+   }
+  
+ 
+   saveUser(){
+   this.submitForm  = true;
+   let date= new Date();
+   debugger
+     if (this.submitForm && this.Propietario.valid) {
+       this.Propietario.markAllAsTouched();//es un método que se puede utilizar en un formulario 
+       //reactivo de Angular para marcar todos los controles como "touched", lo que desencadena
+       // la validación y muestra los mensajes de error si existen
+       return;
+     
+     } else {
+       alert("Campos obligatorios.")
+     }
+   }
+ 
 
 }

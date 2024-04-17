@@ -15,11 +15,13 @@ import { RegistroComponent } from './pages/registro/registro.component';
 
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 
-
+import {  CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PropietariosComponent } from './views/propietarios/propietarios.component';
 import { AgregarInmobiliariaComponent } from './views/agregar-inmobiliaria/agregar-inmobiliaria.component';
 import { ArriendoInmobiliariaComponent } from './views/arriendo-inmobiliaria/arriendo-inmobiliaria.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -46,13 +48,20 @@ import { ArriendoInmobiliariaComponent } from './views/arriendo-inmobiliaria/arr
      FormsModule,
      NgbModule,
      CommonModule,
-     ReactiveFormsModule // form
+     ReactiveFormsModule,
+     MatFormFieldModule,
+     MatInputModule
+   // form
    
   ],
   providers: [
     provideClientHydration(),
     IconSetService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
+
 })
 export class AppModule { }

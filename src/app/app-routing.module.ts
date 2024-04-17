@@ -1,14 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './pages/login/login.component';
 
 
 const routes: Routes = [
 
   {
-    path: '',
-    redirectTo: 'dashboard',
+    // path: '',
+    // redirectTo: 'ventaInmobiliaria',
+    // pathMatch: 'full'
+
+      path: '',
+    redirectTo: '/ventaInmobiliaria',
     pathMatch: 'full'
   },
+
+ 
 
   {
     path: 'ventaInmobiliaria',
@@ -36,10 +43,17 @@ const routes: Routes = [
     loadChildren: () => import('./views/agregar-inmobiliaria/agregar-inmobiliaria.module').then((m) => m.AgregarInmobiliariaModule)
       // import('./views/incident/incident.module').then((m) => m.VentaApartamentoComponent)
    
-  }
+  },
 
+  {
+    path: 'LoginPage',
+    component: LoginComponent,
+    data: {
+      title: 'LoginPage'
+    }
+  },
 
-
+  // { path: '**', component: PageNotFoundComponent } // Ruta comodin
 
   
 ];
